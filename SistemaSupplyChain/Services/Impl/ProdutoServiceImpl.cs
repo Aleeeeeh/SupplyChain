@@ -37,14 +37,20 @@ namespace SistemaSupplyChain.Services.Impl
             return produto;
         }
 
-        public Task<Entradas> LancarEntradaDeProduto(Entradas entradas)
+        public async Task<Entradas> LancarEntradaDeProduto(Entradas entrada)
         {
-            throw new NotImplementedException();
+            await _dbcontext.AddAsync(entrada);
+            _dbcontext.SaveChanges();
+
+            return entrada;
         }
 
-        public Task<Saidas> LancarSaidaDeProduto(Saidas saidas)
+        public async Task<Saidas> LancarSaidaDeProduto(Saidas saida)
         {
-            throw new NotImplementedException();
+            await _dbcontext.AddAsync(saida);
+            _dbcontext.SaveChanges();
+
+            return saida;
         }
     }
 }
