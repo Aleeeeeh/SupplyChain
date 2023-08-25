@@ -22,15 +22,23 @@ namespace SistemaSupplyChain.Controllers
             List<Produtos> produtos =  await _produtoService.BuscarProdutos();
             return Ok(produtos);
         }
-        /*
-        [HttpGet]
-        public async Task<ActionResult<List<object>>> buscarMovimentacaoProdutoPorMes([FromQuery(Name = "mes")] string numeroMes)
+        
+        [HttpGet("/filtroMesEntrada")]
+        public async Task<ActionResult<List<Entradas>>> buscarMovimentacaoProdutoEntradaPorMes([FromQuery(Name = "mes")] int numeroMes)
         {
-            List<object> movimentacaoProdutos = await _produtoService.BuscarEntradasESaidasDeProdutosPorMes(numeroMes);
+            List<Entradas> movimentacaoProdutosEntrada = await _produtoService.BuscarEntradasDeProdutosPorMes(numeroMes);
 
-            return Ok(movimentacaoProdutos);
+            return Ok(movimentacaoProdutosEntrada);
         }
-        */
+
+        [HttpGet("/filtroMesSaida")]
+        public async Task<ActionResult<List<Saidas>>> buscarMovimentacaoProdutoSaidaPorMes([FromQuery(Name = "mes")] int numeroMes)
+        {
+            List<Saidas> movimentacaoProdutosSaida = await _produtoService.BuscarSaidasDeProdutosPorMes(numeroMes);
+
+            return Ok(movimentacaoProdutosSaida);
+        }
+
         [HttpPost]
         public async Task<ActionResult<Produtos>> cadastrarProduto([FromBody]Produtos produtos)
         {

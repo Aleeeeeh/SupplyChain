@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SistemaSupplyChain.Data;
 
@@ -11,9 +12,10 @@ using SistemaSupplyChain.Data;
 namespace SistemaSupplyChain.Migrations
 {
     [DbContext(typeof(SistemaSupplyChainContext))]
-    partial class SistemaSupplyChainContextModelSnapshot : ModelSnapshot
+    [Migration("20230824233721_vinculoDeMovimentacaoComProduto")]
+    partial class vinculoDeMovimentacaoComProduto
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,8 +32,15 @@ namespace SistemaSupplyChain.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<DateTime>("DataEHora")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("Data")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("Hora")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("Local")
                         .IsRequired()
@@ -48,7 +57,8 @@ namespace SistemaSupplyChain.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProdutoID");
+                    b.HasIndex("ProdutoID")
+                        .IsUnique();
 
                     b.ToTable("Entradas");
                 });
@@ -99,8 +109,15 @@ namespace SistemaSupplyChain.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<DateTime>("DataEHora")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("Data")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("Hora")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("Local")
                         .IsRequired()
@@ -117,7 +134,8 @@ namespace SistemaSupplyChain.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProdutoID");
+                    b.HasIndex("ProdutoID")
+                        .IsUnique();
 
                     b.ToTable("Saidas");
                 });
@@ -125,8 +143,8 @@ namespace SistemaSupplyChain.Migrations
             modelBuilder.Entity("SistemaSupplyChain.Models.Entities.Entradas", b =>
                 {
                     b.HasOne("SistemaSupplyChain.Models.Entities.Produtos", "Produto")
-                        .WithMany()
-                        .HasForeignKey("ProdutoID")
+                        .WithOne()
+                        .HasForeignKey("SistemaSupplyChain.Models.Entities.Entradas", "ProdutoID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -136,8 +154,8 @@ namespace SistemaSupplyChain.Migrations
             modelBuilder.Entity("SistemaSupplyChain.Models.Entities.Saidas", b =>
                 {
                     b.HasOne("SistemaSupplyChain.Models.Entities.Produtos", "Produto")
-                        .WithMany()
-                        .HasForeignKey("ProdutoID")
+                        .WithOne()
+                        .HasForeignKey("SistemaSupplyChain.Models.Entities.Saidas", "ProdutoID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

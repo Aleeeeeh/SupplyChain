@@ -5,9 +5,9 @@
         public int Id { get; set; }
         public int Quantidade { get; set; }
         public string? Local { get; set; }
-        public string? Data { get; set; }
-        public string? Hora { get; set; }
+        public DateTime DataEHora { get; set; }
+        public int ? ProdutoID { get; set; }
 
-        public Produtos? IdProduto { get; set; }
+        public virtual Produtos? Produto { get; set; }
     }
 }

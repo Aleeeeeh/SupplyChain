@@ -14,19 +14,29 @@ namespace SistemaSupplyChain.Services.Impl
             _dbcontext = context;
         }
 
-        public Task<List<object>> BuscarEntradasESaidasDeProdutoEmes(string mes, int idProduto)
+        public Task<List<Entradas>> BuscarEntradasDeProdutoEmes(int mes, int idProduto)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<object>> BuscarEntradasESaidasDeProdutosPorMes(string mes)
+        public async Task<List<Entradas>> BuscarEntradasDeProdutosPorMes(int mes)
         {
-            throw new NotImplementedException();
+            return await _dbcontext.Entradas.Where(e => e.DataEHora.Month == mes).ToListAsync();
         }
 
         public async Task<List<Produtos>> BuscarProdutos()
         {
             return await _dbcontext.Produtos.ToListAsync();
+        }
+
+        public Task<List<Saidas>> BuscarSaidasDeProdutoEmes(int mes, int idProduto)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<List<Saidas>> BuscarSaidasDeProdutosPorMes(int mes)
+        {
+            return await _dbcontext.Saidas.Where(s => s.DataEHora.Month == mes).ToListAsync();
         }
 
         public async Task<Produtos> CadastrarProduto(Produtos produto)
