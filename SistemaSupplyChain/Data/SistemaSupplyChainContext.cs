@@ -12,9 +12,9 @@ namespace SistemaSupplyChain.Data
         }
 
         //Migrando tabelas para o banco de dados
-        public DbSet<Produtos> Produtos { get; set; }
-        public DbSet<Entradas> Entradas { get; set;}
-        public DbSet<Saidas> Saidas { get; set; }
+        public DbSet<Produtos>? Produtos { get; set; }
+        public DbSet<Entradas>? Entradas { get; set;}
+        public DbSet<Saidas>? Saidas { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -19,10 +19,10 @@ namespace SistemaSupplyChain.Controllers
         [HttpGet]
         public async Task<ActionResult<List<Produtos>>> buscarProdutosCadastrados()
         {
-            List<Produtos> produtos =  await _produtoService.BuscarProdutos();
+            List<Produtos> produtos = await _produtoService.BuscarProdutos();
             return Ok(produtos);
         }
-        
+
         [HttpGet("/filtroMesEntrada")]
         public async Task<ActionResult<List<Entradas>>> buscarMovimentacaoProdutoEntradaPorMes([FromQuery(Name = "mes")] int numeroMes)
         {
@@ -37,6 +37,22 @@ namespace SistemaSupplyChain.Controllers
             List<Saidas> movimentacaoProdutosSaida = await _produtoService.BuscarSaidasDeProdutosPorMes(numeroMes);
 
             return Ok(movimentacaoProdutosSaida);
+        }
+
+        [HttpGet("/filtroEntradaProduto")]
+        public async Task<ActionResult<List<Entradas>>> buscarMovimentacaoDeEntradasPorMesEProduto([FromQuery(Name = "mes")] int numeroMes, [FromQuery(Name = "ProdutoID")] int produtoID)
+        {
+            List<Entradas> movimentacaoDeProdutoPorMesEntrada = await _produtoService.BuscarEntradasDeProdutoEmes(numeroMes, produtoID);
+
+            return Ok(movimentacaoDeProdutoPorMesEntrada);
+        }
+
+        [HttpGet("/filtroSaidaProduto")]
+        public async Task<ActionResult<List<Saidas>>> buscarMovimentacaoDeSaidasPorMesEProduto([FromQuery(Name = "mes")] int numeroMes, [FromQuery(Name = "ProdutoID")] int produtoID)
+        {
+            List<Saidas> movimentacaoDeProdutoPorMesSaida = await _produtoService.BuscarSaidasDeProdutoEmes(numeroMes, produtoID);
+
+            return Ok(movimentacaoDeProdutoPorMesSaida);
         }
 
         [HttpPost]
