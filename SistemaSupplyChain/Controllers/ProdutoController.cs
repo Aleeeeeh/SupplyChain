@@ -24,33 +24,33 @@ namespace SistemaSupplyChain.Controllers
         }
 
         [HttpGet("/filtroMesEntrada")]
-        public async Task<ActionResult<List<Entradas>>> buscarMovimentacaoProdutoEntradaPorMes([FromQuery(Name = "mes")] int numeroMes)
+        public async Task<ActionResult<List<Entradas>>> buscarMovimentacaoProdutoEntradaPorMes([FromQuery(Name = "mes")] int numeroMes, [FromQuery(Name = "ano")] int ano)
         {
-            List<Entradas> movimentacaoProdutosEntrada = await _produtoService.BuscarEntradasDeProdutosPorMes(numeroMes);
+            List<Entradas> movimentacaoProdutosEntrada = await _produtoService.BuscarEntradasDeProdutosPorMes(numeroMes,ano);
 
             return Ok(movimentacaoProdutosEntrada);
         }
 
         [HttpGet("/filtroMesSaida")]
-        public async Task<ActionResult<List<Saidas>>> buscarMovimentacaoProdutoSaidaPorMes([FromQuery(Name = "mes")] int numeroMes)
+        public async Task<ActionResult<List<Saidas>>> buscarMovimentacaoProdutoSaidaPorMes([FromQuery(Name = "mes")] int numeroMes, [FromQuery(Name = "ano")] int ano)
         {
-            List<Saidas> movimentacaoProdutosSaida = await _produtoService.BuscarSaidasDeProdutosPorMes(numeroMes);
+            List<Saidas> movimentacaoProdutosSaida = await _produtoService.BuscarSaidasDeProdutosPorMes(numeroMes,ano);
 
             return Ok(movimentacaoProdutosSaida);
         }
 
         [HttpGet("/filtroEntradaProduto")]
-        public async Task<ActionResult<List<Entradas>>> buscarMovimentacaoDeEntradasPorMesEProduto([FromQuery(Name = "mes")] int numeroMes, [FromQuery(Name = "ProdutoID")] int produtoID)
+        public async Task<ActionResult<List<Entradas>>> buscarMovimentacaoDeEntradasPorMesEProduto([FromQuery(Name = "mes")] int numeroMes, [FromQuery(Name = "ProdutoID")] int produtoID, [FromQuery(Name = "ano")] int ano)
         {
-            List<Entradas> movimentacaoDeProdutoPorMesEntrada = await _produtoService.BuscarEntradasDeProdutoEmes(numeroMes, produtoID);
+            List<Entradas> movimentacaoDeProdutoPorMesEntrada = await _produtoService.BuscarEntradasDeProdutoEmes(numeroMes,produtoID,ano);
 
             return Ok(movimentacaoDeProdutoPorMesEntrada);
         }
 
         [HttpGet("/filtroSaidaProduto")]
-        public async Task<ActionResult<List<Saidas>>> buscarMovimentacaoDeSaidasPorMesEProduto([FromQuery(Name = "mes")] int numeroMes, [FromQuery(Name = "ProdutoID")] int produtoID)
+        public async Task<ActionResult<List<Saidas>>> buscarMovimentacaoDeSaidasPorMesEProduto([FromQuery(Name = "mes")] int numeroMes, [FromQuery(Name = "ProdutoID")] int produtoID, [FromQuery(Name = "ano")] int ano)
         {
-            List<Saidas> movimentacaoDeProdutoPorMesSaida = await _produtoService.BuscarSaidasDeProdutoEmes(numeroMes, produtoID);
+            List<Saidas> movimentacaoDeProdutoPorMesSaida = await _produtoService.BuscarSaidasDeProdutoEmes(numeroMes,produtoID,ano);
 
             return Ok(movimentacaoDeProdutoPorMesSaida);
         }
