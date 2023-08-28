@@ -14,13 +14,12 @@ namespace SistemaSupplyChain.Services.Impl
             _dbcontext = context;
         }
 
-        public async Task<List<Entradas>> BuscarEntradasDeProdutoEmes(int mes, int idProduto, int ano)
+        public int TotalEntradasDeProdutoEmes(int mes, int idProduto, int ano)
         {
-            return await _dbcontext.Entradas.Where(e => e.DataEHora.Month == mes)
+            return _dbcontext.Entradas.Where(e => e.DataEHora.Month == mes)
                 .Where(e => e.DataEHora.Year == ano)
                 .Where(e => e.ProdutoID == idProduto)
-                .Include(e => e.Produto)
-                .ToListAsync();
+                .Sum(e => e.Quantidade);
         }
 
         public async Task<List<Entradas>> BuscarEntradasDeProdutosPorMes(int mes, int ano)
@@ -36,13 +35,12 @@ namespace SistemaSupplyChain.Services.Impl
             return await _dbcontext.Produtos.ToListAsync();
         }
 
-        public async Task<List<Saidas>> BuscarSaidasDeProdutoEmes(int mes, int idProduto, int ano)
+        public int TotalSaidasDeProdutoEmes(int mes, int idProduto, int ano)
         {
-            return await _dbcontext.Saidas.Where(e => e.DataEHora.Month == mes)
+            return _dbcontext.Saidas.Where(e => e.DataEHora.Month == mes)
                 .Where(e => e.DataEHora.Year == ano)
                 .Where(e => e.ProdutoID == idProduto)
-                .Include(e => e.Produto)
-                .ToListAsync();
+                .Sum(e => e.Quantidade);
         }
 
         public async Task<List<Saidas>> BuscarSaidasDeProdutosPorMes(int mes, int ano)

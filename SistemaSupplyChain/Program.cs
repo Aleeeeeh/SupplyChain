@@ -26,6 +26,8 @@ namespace SistemaSupplyChain
             //Configuração para sempre que for chamada essa interface ser direcionado para a classe de implementação correta
             builder.Services.AddScoped<IProdutoService, ProdutoServiceImpl>();
 
+            builder.Services.AddCors();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -36,6 +38,13 @@ namespace SistemaSupplyChain
             }
 
             app.UseHttpsRedirection();
+
+            app.UseCors(c =>
+            {
+                c.AllowAnyHeader();
+                c.AllowAnyMethod();
+                c.AllowAnyOrigin();
+            });
 
             app.UseAuthorization();
 
