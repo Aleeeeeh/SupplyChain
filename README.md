@@ -6,6 +6,6 @@ importante, também é possível gerar relatório em PDF das entradas e saídas 
 
 ## Tecnologias utilizadas 💻
 .net core 6.0 <br />
-EF 6.0 <br />
+EF core 6.0 <br />
 Banco de dados SQLServer
 Swagger para teste das endpoints criadas
