@@ -9,3 +9,7 @@ importante, também é possível gerar relatório em PDF das entradas e saídas 
 EF core 6.0 <br />
 Banco de dados SQLServer <br />
 Swagger para teste das endpoints criadas
+
+### Autor
+Alefe Ferreira da Silva <br />
+https://www.linkedin.com/in/alefe-ferreira-322125235/
